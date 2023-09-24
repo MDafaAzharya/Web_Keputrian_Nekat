@@ -7,8 +7,13 @@
     </div>
     <div class="card shadow col-10  mx-auto mb-5">
         <div class="card-title justify-content-between d-md-flex">
-            <h4 class="title py-3 ps-4 my-auto "> Daftar Laporan Kegiatan </h4>
-            <button type="button" class="btn-insert my-md-3 mb-3 me-md-4 ms-4 ms-md-0 "  data-bs-toggle="modal" data-bs-target="#exampleModal"> Tambah data</button>
+            <div class="my-auto mt-3 mt-md-0 py-md-3 ps-4 mt-md-1">
+                <h4 class="title "> Daftar Laporan Kegiatan </h4>
+            </div>
+            <div>
+                <button type="button" class="btn-insert my-md-3 mb-3  ms-4 ms-md-0 " id="print-button" data-bs-toggle="modal" data-bs-target="#dateRangeModal"> Print data</button>
+                <button type="button" class="btn-insert my-md-3 mb-3 me-md-4  ms-md-0 " data-bs-toggle="modal" data-bs-target="#exampleModal"> Tambah data</button>
+            </div>
         </div>
         <div class="card-body mt-5 pt-5 table-responsive">
             <table id="example" class="table table-hover table-bordered py-3"  style="width:100%">
@@ -27,7 +32,7 @@
                     @foreach($activitymodel as $key => $report)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $report->date }}</td>
+                        <td>{{$report->date }}</td>
                         <td>{{ $report->jenis_kegiatan }}</td>
                         <td>{{ $report->lokasi }}</td>
                         <td>{{ $report->keterangan }}</td>
@@ -139,6 +144,36 @@
 </div>
 <!-- End Modal Edit -->
 
+<!-- Modal Print -->
+<div class="modal fade" id="dateRangeModal" tabindex="-1" aria-labelledby="dateRangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dateRangeModalLabel">Pilih Rentang Tanggal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="dateRangeForm">
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Tanggal Awal</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">Tanggal Akhir</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="print-modal-button">Cetak</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Modal Print -->
+
 <script>
 new DataTable('#example');
 </script>
@@ -153,6 +188,7 @@ new DataTable('#example');
         var reportPlace = reportRow.find('td:nth-child(4)').text(); // Mendapatkan lokasi dari kolom keempat
         var reportKet = reportRow.find('td:nth-child(5)').text(); // Mendapatkan keterangan dari kolom kelima
         var reportImage = reportRow.find('td:nth-child(6) img').attr('src'); // Mendapatkan path gambar sebelumnya
+        
 
         // Mengisi nilai input dengan data yang sesuai
         $('#edit-report-id').val(reportId);
@@ -219,5 +255,25 @@ new DataTable('#example');
         });
     @endif
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const printModalButton = document.getElementById("print-modal-button");
+        printModalButton.addEventListener("click", function () {
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+
+            if (startDate && endDate) {
+                // Redirect ke halaman cetak dengan parameter tanggal
+                window.open(`/print?start_date=${startDate}&end_date=${endDate}`);
+            } else {
+                // Jika pengguna tidak memasukkan tanggal, tampilkan pesan kesalahan atau kembali ke modal
+                alert("Harap masukkan rentang tanggal.");
+            }
+        });
+    });
+</script>
+
+
 
 @endsection

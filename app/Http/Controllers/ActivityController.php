@@ -105,7 +105,7 @@ class ActivityController extends Controller
     // Redirect dengan pesan sukses jika diperlukan
     return redirect()->route('report')->with('success', 'Laporan berhasil diperbarui.');
     return redirect()->route('report')->with('error', 'Laporan Gagal diperbarui.');
-}
+    }
 
     public function delete($id)
     {
@@ -134,8 +134,19 @@ class ActivityController extends Controller
         return view('profile');
     }
 
+    public function print(Request $request)
+    {
+    $startDate = $request->input('start_date');
+    $endDate = $request->input('end_date');
 
-        
+    if ($startDate && $endDate) {
+        $reports = ActivityMOdel::whereBetween('date', [$startDate, $endDate])->get();
+    } else {
+        $reports = ActivityMOdel::all();
+    }
+
+    return view('print', compact('reports'));
+    }    
 }
 
 

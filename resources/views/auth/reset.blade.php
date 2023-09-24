@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Reset Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
@@ -23,50 +23,55 @@
 				</div>
 			</div>
 			<div class="d-flex justify-content-center form_container">
-				<form action="{{ route('actionlogin') }}" method="post">
+				<form action="{{ route('password.update') }}" method="post">
 					@csrf
+                  
+                    <input type="hidden" name="token" value="{{ $token }}">
 					<div class="input-group mb-3">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fas fa-envelope"></i></span>
 						</div>
-						<input type="email" name="email" class="form-control input_user" value="" required="" placeholder="Email">
+						<input type="email" name="email" class="form-control input_user" required="" placeholder="Email" value="{{ request()->email }}" >
+					</div>
+                    <div class="input-group mb-2">
+						<div class="input-group-append">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" name="password" class="form-control input_pass" required="" placeholder="Password">
 					</div>
 					<div class="input-group mb-2">
 						<div class="input-group-append">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" name="password" class="form-control input_pass" value="" required="" placeholder="Password">
+						<input type="password" name="password_confirmation" class="form-control input_pass" required="" placeholder="Konfirmasi Password">
 					</div>
 						<div class="d-flex justify-content-center mt-4 login_container">
-						<button type="submit" name="submit" id="submit" class="btn login_btn">Login</button>
+						<button type="submit" name="submit" id="submit" class="btn login_btn">Reset Password</button>
 					</div>
-				</form>
-			</div>
-			<div class="mt-4">
-				<div class="ms-5">
-					Belum Punya Akun? <a href="/register" class="ml-2">Sign Up</a><br>
-					Lupa Password? <a href="/password/reset" class="ml-2">forgot possword</a>
-				</div>
+                    @if ($errors->any('email'))
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li> {{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+    			</form>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-	 @if(Session::has('success'))
+	 @if(Session::has('status'))
         Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: '{{ Session::get('success') }}',
+            text: '{{ Session::get('status') }}',
         });
     @endif
 
-    @if(Session::has('error'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '{{ Session::get('error') }}',
-        });
-    @endif
+
 </script>
 </body>
 </html>
