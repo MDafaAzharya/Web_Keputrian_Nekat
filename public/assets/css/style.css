@@ -1,0 +1,215 @@
+body{
+    overflow-x: hidden;
+}
+.nav-link{
+    font-weight: 600 !important;
+    padding: 4px;
+    background-color: #2682A9;
+    border: 2px solid #2682A9;
+    color:#2682A9 !important;    
+    border-radius: 5px;
+    transition: all 0.2s !important;
+}
+
+
+.nav-link:hover{
+    border: 2px solid #2682A9;
+    color:#2682A9;
+    background-color: transparent;
+    padding: 7px;
+    font-weight: 600;
+}
+
+.navbar{
+    background-color: transparent;
+}
+
+.logout_button {
+  background: transparent;
+  border: 1px solid #2682A9;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #2682A9;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding:8px 10px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  transition: all 0.3s;
+}
+
+.logout_button:hover,
+.logout_button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #fff;
+  background: #2682A9;
+
+}
+
+.logout_button:active {
+  opacity: .5;
+}
+
+.card{
+    background-color: #Fafafa !important;
+}
+.card-title{
+    background-color: #2682A9;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+.title{
+    color: #f0f0f0;
+}
+
+footer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+.btn-insert {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #FFCC70;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #2682A9;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  margin: 0;
+  padding: 8px;
+  min-height: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.btn-insert:hover,
+.btn-insert:focus {
+  background-color: #fbdca1;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.btn-insert:hover {
+  transform: translateY(-1px);
+}
+
+.btn-insert:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.form-control{
+    width: 120px;
+}
+
+div.dataTables_length select {
+  border-radius: 5px;
+  border :2px solid #2682A9 !important;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  position: sticky;
+  
+}
+div.dataTables_length select:hover {
+  background-color: #e3e3e3;
+}
+div.dataTables_length select:focus {
+  outline: none;
+  border-color: #2682A9;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.dataTables_filter input {
+  border-radius: 5px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border: 2px solid #2682A9;
+}
+.dataTables_filter input:hover {
+  background-color: #f2f2f2;
+}
+.dataTables_filter input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+
+@media (min-width: 320px) and (max-width: 1024px){
+    .nav-link{
+        font-weight: 600;
+        background-color: transparent;
+        border: 2px solid transparent;
+        color:#2682A9;    
+        border-radius: 5px;
+        width:10px;
+    }
+    .nav-link:hover{
+        border: 2px solid transparent;
+        color: #2682A9;;
+        background-color: transparent;
+        padding: 4px;
+        font-weight: 600;
+    }
+    footer{
+        position: relative;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    div.dataTables_length select {
+      font-size: 14px;
+      border-radius: 5px;
+      border :2px solid #2682A9 !important;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      margin-top: 40px;
+      margin-bottom: 10px;
+      position: sticky;
+      
+    }
+    div.dataTables_length select:hover {
+      background-color: #e3e3e3;
+    }
+    div.dataTables_length select:focus {
+      outline: none;
+      border-color: #2682A9;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    #example thead {
+      position: relative;
+  }
+
+
+}
+
