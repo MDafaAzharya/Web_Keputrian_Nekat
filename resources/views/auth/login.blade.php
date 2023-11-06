@@ -43,7 +43,7 @@
 				</form>
 			</div>
 			<div class="mt-4">
-				<div class="ms-5">
+				<div class="ms-5 textInfo ">
 					Belum Punya Akun? <a href="/register" class="ml-2">Sign Up</a><br>
 					Lupa Password? <a href="/password/reset" class="ml-2">forgot possword</a>
 				</div>

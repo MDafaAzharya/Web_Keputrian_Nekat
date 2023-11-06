@@ -22,6 +22,8 @@ Route::get('/nav', function () {
     return view('nav');
 });
 
+Route::get('/doc', [ActivityController::class, 'showdatacard'])->name('doc');
+
 //regist
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/actionregister', [LoginController::class, 'actionregister'])->name('actionregister');
@@ -49,4 +51,6 @@ Route::post('update-profile', [LoginController::class, 'editprofile'])->name('up
 //print
 Route::get('/print', [ActivityController::class, 'print'])->name('print');
 
+Route::post('/search.activity', [ActivityController::class, 'searchActivity'])->name('search.activity');
+Route::post('/sort.activity', [ActivityController::class, 'sortActivity'])->name('sort.activity');
 

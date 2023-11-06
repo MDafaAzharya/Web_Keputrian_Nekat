@@ -52,6 +52,12 @@ class ActivityController extends Controller
         return view('report', compact('activitymodel'));
     }
 
+    public function showdatacard()
+    {
+        $activitymodel = ActivityModel::all();
+        return view('doc', compact('activitymodel'));
+    }
+
 
     public function edit($id)
     {
@@ -140,13 +146,37 @@ class ActivityController extends Controller
     $endDate = $request->input('end_date');
 
     if ($startDate && $endDate) {
-        $reports = ActivityMOdel::whereBetween('date', [$startDate, $endDate])->get();
+        $reports = ActivityModel::whereBetween('date', [$startDate, $endDate])->get();
     } else {
-        $reports = ActivityMOdel::all();
+        $reports = ActivityMdel::all();
     }
 
     return view('print', compact('reports'));
     }    
+
+    public function searchActivity(Request $request){
+        $search = $request->input('search');
+
+        $activitymodel = ActivityModel::where('jenis_kegiatan', 'LIKE', "%$search%")
+        ->orWhere('lokasi', 'LIKE', "%$search%")
+        ->orWhere('date', 'LIKE', "%$search%")
+        ->get();
+
+    return view('doc', compact('activitymodel'));
+
+    }
+
+    public function sortActivity(Request $request){
+        $sort = $request->input('sort');
+    
+        if ($sort === 'oldest') {
+            $activitymodel = ActivityModel::orderBy('date', 'asc')->get();
+        } elseif ($sort === 'newest') {
+            $activitymodel = ActivityModel::orderBy('date', 'desc')->get();
+        }
+    
+        return view('doc', compact('activitymodel'));
+    }
 }
 
 

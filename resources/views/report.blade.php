@@ -273,7 +273,4 @@ new DataTable('#example');
         });
     });
 </script>
-
-
-
 @endsection

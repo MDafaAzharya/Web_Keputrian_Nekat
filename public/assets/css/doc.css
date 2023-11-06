@@ -1,0 +1,114 @@
+.titleDoc{
+    font-family:'Poppins', sans-serif;
+}
+
+.date{
+    color:#2682a9;
+}
+
+.activity{
+    margin-top: -15px;
+}
+
+.locket{
+    margin-top: -5px;;
+}
+
+.rule{
+  color: #2682a9;
+  border: 2px solid #2682a9;
+  opacity: 100%;
+}
+
+.list-image{
+    font-family:'Poppins', sans-serif;   
+}
+
+.image{
+  border: 3px solid #2682a9;
+  border-radius: 15px; 
+}
+
+.list-image:hover{
+    transform: scale(1.1);
+    transition: all 0.5s;
+}
+
+select {
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;
+    outline:0;
+    box-shadow:none;
+    border:none!important;
+    background-image: none;
+    padding-left: 10px;
+    flex: 1;
+    color:#2682a9;
+    cursor:pointer;
+    font-size: 1em;
+    font-family: Futura MD BT;
+    font-weight: 500;
+    padding-top:1px;
+    padding-left: 15px;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+  .select {
+    position: relative;
+    display: flex;
+    width: 12em;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 20px;
+    border : 2px solid #2682a9;
+  }
+  .select::after {
+    content: '\25BC';
+    position: absolute;
+    margin-top: 5px;
+    right: 0;
+    padding: 0 15px;
+    background:transparent;
+    color:#2682a9;
+    cursor:pointer;
+    pointer-events:none;
+    transition:.25s all ease;
+  }
+  .select:hover{
+    opacity: 80%;
+  }
+
+.search-input {
+width: 85%;
+padding: 5px; /* Lebar input */
+border: 2px solid #2682a9;
+border-right: none; /* Garis tepi */
+outline: none;
+font-size: 16px;
+border-radius: 10px;
+border-bottom-right-radius: 0px;
+border-top-right-radius: 0px;
+}
+
+/* CSS untuk ikon pencarian (opsional) */
+.search-icon {
+position: relative;
+transform: translateY(-50%);
+margin-left: 165px;
+margin-top: -19px;
+cursor: pointer;
+border: 2px solid #2682a9;
+border-left: none;
+padding: 4px;
+border-radius: 10px;
+border-bottom-left-radius: 0px ;
+border-top-left-radius: 0px ;
+}
+
+.buttonSearch{
+  border: none;
+  background: transparent;
+}
