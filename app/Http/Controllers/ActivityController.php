@@ -5,46 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ActivityModel; 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 class ActivityController extends Controller
 {
     public function insertActivity(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'date' => 'required|date',
-            'activity' => 'required|string',
-            'place' => 'required|string',
-            'ket' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Sesuaikan dengan kebutuhan Anda
-        ]);
-    
-        try {
-            // Upload gambar jika ada
-            if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('images', 'public');
-            } else {
-                $imagePath = null;
-            }
-    
-            // Simpan data ke dalam tabel activity_report
-            ActivityModel::create([
-                'date' => $request->input('date'),
-                'jenis_kegiatan' => $request->input('activity'),
-                'lokasi' => $request->input('place'),
-                'keterangan' => $request->input('ket'),
-                'image' => $imagePath, // Simpan path gambar
-            ]);
-    
-            // Tampilkan notifikasi SweetAlert berhasil
-            return redirect()->back()->with('success', 'Data berhasil disimpan.');
-    
-        } catch (\Exception $e) {
-            // Tampilkan notifikasi SweetAlert gagal
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
-    }
-            
+{
+    // Validasi input
+    //dd($request->all());
+    $request->validate([
+        'date' => 'required|date',
+        'activity' => 'required|string',
+        'place' => 'required|string',
+        'ket' => 'required|string',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Maksimum 2 MB
+    ]);
+
    
+        if ($request->file('image')) {
+            // $image = $this->upload($request->file('image'), $this->path);
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName();
+            $file->move('assets/dataimage', $fileName);
+            // $validated['logo'] = $fileName;
+        }
+        // Simpan data ke dalam tabel activity_report
+        ActivityModel::create([
+            'date' => $request->input('date'),
+            'jenis_kegiatan' => $request->input('activity'),
+            'lokasi' => $request->input('place'),
+            'keterangan' => $request->input('ket'),
+            'image' => $fileName,
+        ]);
+
+        // Tampilkan notifikasi SweetAlert berhasil
+        return redirect()->back()->with('success', 'Data berhasil disimpan.');
+   
+}
 
     public function showdata()
     {
@@ -65,76 +62,61 @@ class ActivityController extends Controller
         return view('report', compact('activity'));
     }
 
-
-    public function editdata(Request $request)
-    {
-        // Validasi data yang diterima dari form edit
-    $validatedData = $request->validate([
-        'date' => 'required|date',
-        'activity' => 'required|string',
-        'place' => 'required|string',
-        'ket' => 'required|string',
-        'image' => 'nullable|image|max:2048', // Contoh validasi untuk gambar (opsional)
-    ]);
-
-    // Mengambil ID laporan dari input hidden
-    $reportId = $request->input('report_id');
-
-    // Mengambil laporan berdasarkan ID
-    $report = ActivityModel::find($reportId);
-
-    if (!$report) {
-        // Laporan tidak ditemukan, handle kesalahan di sini
-        return redirect()->back()->with('error', 'Laporan tidak ditemukan.');
-    }
-
-    // Update data laporan berdasarkan data yang diterima dari form
-    $report->date = $validatedData['date'];
-    $report->jenis_kegiatan = $validatedData['activity'];
-    $report->lokasi = $validatedData['place'];
-    $report->keterangan = $validatedData['ket'];
-
-    // Jika ada file gambar yang diunggah, simpan dan perbarui path gambar
-    if ($request->hasFile('image')) {
-        // Hapus gambar lama jika ada
-        if ($report->image) {
-            Storage::disk('public')->delete($report->image);
+    public function editdata(Request $request){
+        // Validasi input
+        $request->validate([
+            'date' => 'required|date',
+            'activity' => 'required|string',
+            'place' => 'required|string',
+            'ket' => 'required|string',
+            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif', 
+        ]);
+        try {
+            $user = ActivityModel::findorfail($request->report_id);
+            $user->date = $request->date;
+            $user->jenis_kegiatan = $request->activity;
+            $user->lokasi = $request->place;
+            $user->keterangan = $request->ket;
+            
+            if ($request->hasFile('image')) {
+                $originalFileName = $request->file('image')->getClientOriginalName();
+                $imagePath = public_path('assets/dataimage/' . $user->image);
+                
+                if (File::exists($imagePath)) {
+                    File::delete($imagePath);
+                }
+        
+                // Menyimpan gambar baru ke storage
+                $image = $request->file('image')->move('assets/dataimage', $originalFileName);
+        
+                // Mengupdate nama file gambar
+                $user->image = $originalFileName;
+            }
+            
+            $user->update();
+            // Tampilkan notifikasi SweetAlert berhasil
+            return redirect()->back()->with('success', 'Data berhasil disimpan.');
+        } catch (\Exception $e) {
+            // Tampilkan notifikasi SweetAlert gagal
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        // Simpan gambar baru
-        $imagePath = $request->file('image')->store('images', 'public');
-        $report->image = $imagePath;
-    }
-
-    $report->save();
-
-    // Redirect dengan pesan sukses jika diperlukan
-    return redirect()->route('report')->with('success', 'Laporan berhasil diperbarui.');
-    return redirect()->route('report')->with('error', 'Laporan Gagal diperbarui.');
     }
 
     public function delete($id)
     {
-        // Temukan laporan berdasarkan ID
         $report = ActivityModel::find($id);
-
-        if (!$report) {
-            // Laporan tidak ditemukan, handle kesalahan di sini
-            return redirect()->back()->with('error', 'Laporan tidak ditemukan.');
+        $imagePath = public_path('assets/dataimage/' . $report->image);
+                
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
         }
-
-        // Hapus gambar terkait jika ada
-        if ($report->image) {
-            Storage::disk('public')->delete($report->image); // Menggunakan 'public' disk untuk menghapus gambar
-        }
-
+        
         // Hapus laporan dari database
         $report->delete();
-
+        
         // Redirect dengan pesan sukses jika diperlukan
         return redirect()->route('report')->with('success', 'Laporan berhasil dihapus.');
     }
-
     public function profile()
     {
         return view('profile');
@@ -148,7 +130,7 @@ class ActivityController extends Controller
     if ($startDate && $endDate) {
         $reports = ActivityModel::whereBetween('date', [$startDate, $endDate])->get();
     } else {
-        $reports = ActivityMdel::all();
+        $reports = ActivityModel::all();
     }
 
     return view('print', compact('reports'));
@@ -178,5 +160,3 @@ class ActivityController extends Controller
         return view('doc', compact('activitymodel'));
     }
 }
-
-

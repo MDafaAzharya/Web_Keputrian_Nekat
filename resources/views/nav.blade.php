@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar navbar-expand-lg shadow ">
     <div class="container-fluid px-4">
-        <a class="navbar-brand" href="#"><img src="{{ asset('assets/img/katapang.png') }}" alt="" srcset="" width:"40px" height="40px"></a>
+        <a class="navbar-brand" href="/doc"><img src="{{ asset('assets/img/katapang.png') }}" alt="" srcset="" width:"40px" height="40px"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>

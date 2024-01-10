@@ -14,6 +14,18 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
+Route::middleware('auth')->group(function () {    
+    // CRUD
+    Route::post('/insert.activity', [ActivityController::class, 'insertActivity'])->name('insert.activity');
+    Route::get('/report', [ActivityController::class, 'showdata'])->name('report');
+    Route::post('/update-activity', [ActivityController::class, 'editdata'])->name('update.activity');
+    Route::get('/report/delete/{id}', [ActivityController::class, 'delete'])->name('report.delete');
+    Route::get('/profile', [ActivityController::class, 'profile'])->name('profile');
+    Route::post('update-profile', [LoginController::class, 'editprofile'])->name('update.profile');
+    //print
+    Route::get('/print', [ActivityController::class, 'print'])->name('print');
+});
+
 Route::get('/', function () {
     return view('auth.register');
 });
@@ -37,19 +49,6 @@ Route::get('/password/reset',  [LoginController::class, 'showLinkRequestForm'])-
 Route::post('/password/email',  [LoginController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}',  [LoginController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password',  [LoginController::class, 'resetpass'])->name('password.update');;
-//CRUD
-Route::post('/insert.activity', [ActivityController::class, 'insertActivity'])->name('insert.activity');
-
-Route::get('/report', [ActivityController::class, 'showdata'])->name('report');
-
-Route::post('/update-activity', [ActivityController::class, 'editdata'])->name('update.activity');
-Route::get('/report/delete/{id}', [ActivityController::class, 'delete'])->name('report.delete');
-
-Route::get('/profile', [ActivityController::class, 'profile'])->name('profile');
-Route::post('update-profile', [LoginController::class, 'editprofile'])->name('update.profile');
-
-//print
-Route::get('/print', [ActivityController::class, 'print'])->name('print');
 
 Route::post('/search.activity', [ActivityController::class, 'searchActivity'])->name('search.activity');
 Route::post('/sort.activity', [ActivityController::class, 'sortActivity'])->name('sort.activity');

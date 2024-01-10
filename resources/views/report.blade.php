@@ -38,7 +38,9 @@
                         <td>{{ $report->keterangan }}</td>
                         <td class="text-center">
                             @if($report->image)
-                            <img src="{{ Storage::url($report->image) }}" alt="Image" width="100" height="100%">
+                            <div class="mb-2">
+                                <img src="{{ asset('assets/dataimage/' .$report->image) }}" height="110" width="110" alt="" srcset="" data-bs-toggle="tooltip" >
+                            </div>
                             @else
                             No Image
                             @endif

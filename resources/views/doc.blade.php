@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-md-12 mt-3 mt-md-0">
-            <div class="titleDoc text-center">
+            <div class="titleDoc text-center" id="titleDoc">
                 <h6> Galeri Dokumentasi</h6>
                 <h1 class="fw-bold" style="color:#2682a9;"> Arsip Keputrian </h1>
                 <p> Sekolah Menengah Kejuruan Negeri 1 Katapang </p>
@@ -61,7 +61,7 @@
         <div class="row mx-3 mt-3">
         @foreach($activitymodel as $key => $report)
                 <div class="list-image pt-md-3 pt-0 col-lg-3 col-md-6 col-12 mx-mdvh-auto mx-auto my-md-1 my-2" >
-                    <img src="{{ Storage::url($report->image) }}" width="100%" height="170" class="image object-fit-cover d-flex mx-auto  shadow-sm " 
+                    <img src="{{ asset('assets/dataimage/' .$report->image) }}" width="100%" height="170" class="image object-fit-cover d-flex mx-auto  shadow-sm " 
                         alt="...">
                     <div class="body text-center mt-md-3 mt-0">
                         <p class="date fw-semibold"> <i>{{ date('d M Y', strtotime($report->date)) }}</i>  </p>

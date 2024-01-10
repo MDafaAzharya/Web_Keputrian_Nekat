@@ -30,7 +30,7 @@
                 <td><center>{{ $report->keterangan }}</td>
                 <td>
                     @if($report->image)
-                    <img src="{{ Storage::url($report->image) }}" alt="Image" width="70" height="70">
+                    <img src="{{ asset('assets/dataimage/' .$report->image) }}" alt="Image" width="70" height="70">
                     @else
                     No Image
                     @endif
