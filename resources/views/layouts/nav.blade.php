@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/super-build/ckeditor.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
 </head>
 
 <body>
@@ -47,6 +49,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('galeri-dashboard')}}">Galeri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('agenda-dashboard')}}">Agenda</a>
                     </li>
 
                 </ul>

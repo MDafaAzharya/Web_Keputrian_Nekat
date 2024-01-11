@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+h4{
+    font-family:'Poppins', sans-serif;
+    color:#2682A9;
+}
+
+.container{
+    font-family:'Poppins', sans-serif;
+}
+
+.fc .fc-col-header-cell-cushion{
+    text-decoration: none;
+    color: #2682A9;
+}
+
+.fc .fc-daygrid-day-number{
+    text-decoration: none;
+    color: #2682A9;
+}

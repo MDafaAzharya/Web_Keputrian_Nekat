@@ -25,14 +25,22 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::get('print', [ActivityController::class, 'print'])->name('print');
 
     Route::prefix('galeri-dashboard')->group(function () {
-        Route::get('galeri-dashboard', [App\Http\Controllers\GaleriController::class, 'index'])->name('galeri-dashboard');
-        Route::post('data-galeri-register', [App\Http\Controllers\GaleriController::class, 'store'])->name('galeri.data-galeri-register');
-        Route::get('data-galeri-delete/{id}', [App\Http\Controllers\GaleriController::class, 'destroy'])->name('galeri.data-galeri-delete');
-      });
-      Route::prefix('profile-keputrian')->group(function () {
-        Route::get('profile-keputrian', [App\Http\Controllers\KeputrianController::class, 'index'])->name('profile-keputrian');
-        Route::post('data-keputrian-update', [App\Http\Controllers\KeputrianController::class, 'update'])->name('keputrian.data-keputrian-update');
-      });
+      Route::get('galeri-dashboard', [App\Http\Controllers\GaleriController::class, 'index'])->name('galeri-dashboard');
+      Route::post('data-galeri-register', [App\Http\Controllers\GaleriController::class, 'store'])->name('galeri.data-galeri-register');
+      Route::get('data-galeri-delete/{id}', [App\Http\Controllers\GaleriController::class, 'destroy'])->name('galeri.data-galeri-delete');
+    });
+    Route::prefix('profile-keputrian')->group(function () {
+      Route::get('profile-keputrian', [App\Http\Controllers\KeputrianController::class, 'index'])->name('profile-keputrian');
+      Route::post('data-keputrian-update', [App\Http\Controllers\KeputrianController::class, 'update'])->name('keputrian.data-keputrian-update');
+    });
+    Route::prefix('agenda-dashboard')->group(function () {
+      Route::get('agenda-dashboard', [App\Http\Controllers\AgendaController::class, 'index'])->name('agenda-dashboard');
+      Route::get('data-agenda-show', [App\Http\Controllers\AgendaController::class, 'show'])->name('agenda.data-agenda-show');
+      Route::post('data-agenda-register', [App\Http\Controllers\AgendaController::class, 'store'])->name('agenda.data-agenda-register');
+      Route::get('data-agenda-delete/{id}', [App\Http\Controllers\AgendaController::class, 'destroy'])->name('agenda.data-agenda-delete');
+      Route::get('data-agenda-edit/{id}', [App\Http\Controllers\AgendaController::class, 'edit'])->name('agenda.data-agenda-edit');
+      Route::post('data-agenda-update', [App\Http\Controllers\AgendaController::class, 'update'])->name('agenda.data-agenda-update');
+    });
 });
 
 Route::get('/', function () {

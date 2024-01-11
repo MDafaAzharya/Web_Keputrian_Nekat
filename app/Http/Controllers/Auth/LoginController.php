@@ -29,7 +29,7 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($data)) {
-            return redirect('/report');
+            return redirect()->route('report');
         }else{
             return redirect('/login')->with('error', 'Password Atau Username Salah: ');
             
