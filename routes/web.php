@@ -27,14 +27,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', function () {
-    return view('auth.register');
+    return view('home');
 });
 
 Route::get('/nav', function () {
     return view('nav');
 });
-
-Route::get('/doc', [ActivityController::class, 'showdatacard'])->name('doc');
 
 //regist
 Route::get('/register', [LoginController::class, 'register'])->name('register');
