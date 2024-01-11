@@ -1,4 +1,4 @@
-@extends('navbar')
+@extends('../layouts/navbar')
 
 @section('content')
 <section class="mt-5 home">

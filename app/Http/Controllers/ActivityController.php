@@ -46,20 +46,13 @@ class ActivityController extends Controller
     public function showdata()
     {
         $activitymodel = ActivityModel::all();
-        return view('report', compact('activitymodel'));
+        return view('dashboard/report', compact('activitymodel'));
     }
-
-    public function showdatacard()
-    {
-        $activitymodel = ActivityModel::all();
-        return view('doc', compact('activitymodel'));
-    }
-
 
     public function edit($id)
     {
         $activitymodel = ActivityModel::all($id);
-        return view('report', compact('activity'));
+        return view('dashboard/report', compact('activity'));
     }
 
     public function editdata(Request $request){
@@ -119,7 +112,7 @@ class ActivityController extends Controller
     }
     public function profile()
     {
-        return view('profile');
+        return view('dashboard/profile');
     }
 
     public function print(Request $request)
@@ -133,30 +126,6 @@ class ActivityController extends Controller
         $reports = ActivityModel::all();
     }
 
-    return view('print', compact('reports'));
+    return view('dashboard/print', compact('reports'));
     }    
-
-    public function searchActivity(Request $request){
-        $search = $request->input('search');
-
-        $activitymodel = ActivityModel::where('jenis_kegiatan', 'LIKE', "%$search%")
-        ->orWhere('lokasi', 'LIKE', "%$search%")
-        ->orWhere('date', 'LIKE', "%$search%")
-        ->get();
-
-    return view('doc', compact('activitymodel'));
-
-    }
-
-    public function sortActivity(Request $request){
-        $sort = $request->input('sort');
-    
-        if ($sort === 'oldest') {
-            $activitymodel = ActivityModel::orderBy('date', 'asc')->get();
-        } elseif ($sort === 'newest') {
-            $activitymodel = ActivityModel::orderBy('date', 'desc')->get();
-        }
-    
-        return view('doc', compact('activitymodel'));
-    }
 }

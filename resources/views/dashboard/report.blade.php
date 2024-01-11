@@ -1,4 +1,4 @@
-@extends('nav')
+@extends('../layouts/nav')
 
 @section('content')
 <div class="row">

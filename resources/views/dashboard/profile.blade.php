@@ -1,4 +1,4 @@
-@extends('nav')
+@extends('../layouts/nav')
 
 @section('content')
 <div class="prof row my-5 pt-3 d-flex justify-content-center">

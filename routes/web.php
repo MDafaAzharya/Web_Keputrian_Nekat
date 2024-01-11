@@ -14,16 +14,25 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::middleware('auth')->group(function () {    
+Route::prefix('dashboard')->middleware(['auth'])->group(function () {    
     // CRUD
-    Route::post('/insert.activity', [ActivityController::class, 'insertActivity'])->name('insert.activity');
-    Route::get('/report', [ActivityController::class, 'showdata'])->name('report');
-    Route::post('/update-activity', [ActivityController::class, 'editdata'])->name('update.activity');
-    Route::get('/report/delete/{id}', [ActivityController::class, 'delete'])->name('report.delete');
-    Route::get('/profile', [ActivityController::class, 'profile'])->name('profile');
+    Route::post('insert.activity', [ActivityController::class, 'insertActivity'])->name('insert.activity');
+    Route::get('report', [ActivityController::class, 'showdata'])->name('report');
+    Route::post('update-activity', [ActivityController::class, 'editdata'])->name('update.activity');
+    Route::get('report/delete/{id}', [ActivityController::class, 'delete'])->name('report.delete');
+    Route::get('profile', [ActivityController::class, 'profile'])->name('profile');
     Route::post('update-profile', [LoginController::class, 'editprofile'])->name('update.profile');
-    //print
-    Route::get('/print', [ActivityController::class, 'print'])->name('print');
+    Route::get('print', [ActivityController::class, 'print'])->name('print');
+
+    Route::prefix('galeri-dashboard')->group(function () {
+        Route::get('galeri-dashboard', [App\Http\Controllers\GaleriController::class, 'index'])->name('galeri-dashboard');
+        Route::post('data-galeri-register', [App\Http\Controllers\GaleriController::class, 'store'])->name('galeri.data-galeri-register');
+        Route::get('data-galeri-delete/{id}', [App\Http\Controllers\GaleriController::class, 'destroy'])->name('galeri.data-galeri-delete');
+      });
+      Route::prefix('profile-keputrian')->group(function () {
+        Route::get('profile-keputrian', [App\Http\Controllers\KeputrianController::class, 'index'])->name('profile-keputrian');
+        Route::post('data-keputrian-update', [App\Http\Controllers\KeputrianController::class, 'update'])->name('keputrian.data-keputrian-update');
+      });
 });
 
 Route::get('/', function () {
