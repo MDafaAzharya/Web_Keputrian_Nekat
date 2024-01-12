@@ -52,6 +52,8 @@ body{
     height:400px;
     width:80%;
     border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    object-fit: cover;
 }
 
 .konten-2{
@@ -60,9 +62,10 @@ body{
 }
 
 .profile-image{
-    width: 40vw;
-    height: 23vw;
-    border-radius: 20px;;
+    width: 35vw;
+    height: 20vw;
+    border-radius: 20px;
+    object-fit: cover;
 }
 
 .card{
@@ -82,10 +85,18 @@ body{
    color: black;
 }
 
+.img-pr{
+    height:170px;
+    object-fit: cover;
+  }
+
 @media (min-width: 320px) and (max-width: 767px){        
     .image-carousel{
         height:200px;
         width:80%;
         border-radius: 20px;
     }
+    .img-pr{
+        height:100%;
+      }
 }

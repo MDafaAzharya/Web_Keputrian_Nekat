@@ -23,13 +23,13 @@
     <div class="collapse navbar-collapse d-lg-flex justify-content-between pe-lg-5 me-lg-5" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="/">Home</a>
+          <a class="nav-link " aria-current="page" href="{{route('home')}}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Galeri</a>
+          <a class="nav-link" href="{{route('galeri')}}">Galeri</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Jadwal</a>
+          <a class="nav-link" href="{{route('agenda')}}">Jadwal</a>
         </li>
       </ul>
       <ul class="navbar-nav ">

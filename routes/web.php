@@ -43,9 +43,10 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     });
 });
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/galeri', [App\Http\Controllers\HomeController::class, 'galeri'])->name('galeri');
+Route::get('/agenda', [App\Http\Controllers\HomeController::class, 'agenda'])->name('agenda');
+Route::get('/agenda-show', [App\Http\Controllers\HomeController::class, 'showagenda'])->name('agenda-show');
 
 Route::get('/nav', function () {
     return view('nav');
