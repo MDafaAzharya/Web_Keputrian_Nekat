@@ -22,7 +22,7 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::get('report/delete/{id}', [ActivityController::class, 'delete'])->name('report.delete');
     Route::get('profile', [ActivityController::class, 'profile'])->name('profile');
     Route::post('update-profile', [LoginController::class, 'editprofile'])->name('update.profile');
-    Route::get('print', [ActivityController::class, 'print'])->name('print');
+    Route::post('print', [ActivityController::class, 'print'])->name('print');
 
     Route::prefix('galeri-dashboard')->group(function () {
       Route::get('galeri-dashboard', [App\Http\Controllers\GaleriController::class, 'index'])->name('galeri-dashboard');
@@ -45,6 +45,7 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/galeri', [App\Http\Controllers\HomeController::class, 'galeri'])->name('galeri');
+Route::get('/galeri{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('galeri-detail');
 Route::get('/agenda', [App\Http\Controllers\HomeController::class, 'agenda'])->name('agenda');
 Route::get('/agenda-show', [App\Http\Controllers\HomeController::class, 'showagenda'])->name('agenda-show');
 

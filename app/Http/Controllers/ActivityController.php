@@ -18,15 +18,15 @@ class ActivityController extends Controller
         'activity' => 'required|string',
         'place' => 'required|string',
         'ket' => 'required|string',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Maksimum 2 MB
+        // 'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Maksimum 2 MB
     ]);
 
-   
-        if ($request->file('image')) {
+        $imagePaths = [];
+        foreach ($request->file('image') as $image) {
             // $image = $this->upload($request->file('image'), $this->path);
-            $file = $request->file('image');
-            $fileName = $file->getClientOriginalName();
-            $file->move('assets/dataimage', $fileName);
+            $fileName = $image->getClientOriginalName();
+            $image->move('assets/dataimage', $fileName);
+            $imagePaths[] = $fileName;
             // $validated['logo'] = $fileName;
         }
         // Simpan data ke dalam tabel activity_report
@@ -35,7 +35,7 @@ class ActivityController extends Controller
             'jenis_kegiatan' => $request->input('activity'),
             'lokasi' => $request->input('place'),
             'keterangan' => $request->input('ket'),
-            'image' => $fileName,
+            'image' => json_encode($imagePaths),
         ]);
 
         // Tampilkan notifikasi SweetAlert berhasil
@@ -55,38 +55,47 @@ class ActivityController extends Controller
         return view('dashboard/report', compact('activity'));
     }
 
-    public function editdata(Request $request){
+    public function editdata(Request $request)
+    {
         // Validasi input
         $request->validate([
             'date' => 'required|date',
             'activity' => 'required|string',
             'place' => 'required|string',
             'ket' => 'required|string',
-            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif', 
         ]);
+    
         try {
-            $user = ActivityModel::findorfail($request->report_id);
-            $user->date = $request->date;
-            $user->jenis_kegiatan = $request->activity;
-            $user->lokasi = $request->place;
-            $user->keterangan = $request->ket;
-            
+            $activity = ActivityModel::findOrFail($request->report_id);
+            $activity->date = $request->date;
+            $activity->jenis_kegiatan = $request->activity;
+            $activity->lokasi = $request->place;
+            $activity->keterangan = $request->ket;
+    
             if ($request->hasFile('image')) {
-                $originalFileName = $request->file('image')->getClientOriginalName();
-                $imagePath = public_path('assets/dataimage/' . $user->image);
-                
-                if (File::exists($imagePath)) {
-                    File::delete($imagePath);
+                // Hapus gambar lama jika ada
+                $oldImages = json_decode($activity->image);
+                foreach ($oldImages as $oldImage) {
+                    $oldImagePath = public_path('assets/dataimage/' . $oldImage);
+                    if (File::exists($oldImagePath)) {
+                        File::delete($oldImagePath);
+                    }
                 }
-        
-                // Menyimpan gambar baru ke storage
-                $image = $request->file('image')->move('assets/dataimage', $originalFileName);
-        
-                // Mengupdate nama file gambar
-                $user->image = $originalFileName;
+    
+                // Simpan gambar baru ke storage
+                $uploadedImages = [];
+                foreach ($request->file('image') as $image) {
+                    $originalFileName = $image->getClientOriginalName();
+                    $image->move('assets/dataimage', $originalFileName);
+                    $uploadedImages[] = $originalFileName;
+                }
+    
+                // Simpan nama file gambar sebagai JSON
+                $activity->image = json_encode($uploadedImages);
             }
-            
-            $user->update();
+    
+            $activity->update();
+    
             // Tampilkan notifikasi SweetAlert berhasil
             return redirect()->back()->with('success', 'Data berhasil disimpan.');
         } catch (\Exception $e) {
@@ -126,6 +135,6 @@ class ActivityController extends Controller
         $reports = ActivityModel::all();
     }
 
-    return view('dashboard/print', compact('reports'));
+    return view('dashboard.print', compact('reports'));
     }    
 }

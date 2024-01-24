@@ -39,7 +39,19 @@
                         <td class="text-center">
                             @if($report->image)
                             <div class="mb-2">
-                                <img src="{{ asset('assets/dataimage/' .$report->image) }}" height="110" width="110" alt="" srcset="" data-bs-toggle="tooltip" >
+                            @php
+                                $imagePaths = json_decode($report->image);
+                                @endphp
+
+                                @if(!empty($imagePaths))
+                                    @foreach($imagePaths as $imagePath)
+                                        <div class="mb-2">
+                                            <img src="{{ asset('assets/dataimage/' . $imagePath) }}" height="110" alt="" srcset="" data-bs-toggle="tooltip">
+                                        </div>
+                                    @endforeach
+                                @else
+                                    No Image
+                                @endif
                             </div>
                             @else
                             No Image
@@ -86,7 +98,7 @@
                 </div>
                 <div class="form-group mb-3 d-md-flex justify-content-between">
                     <label for="image" class="form-label my-auto">Dokumentasi</label>
-                    <input type="file" class="form-control me-4" id="image" name="image" style="width:70%;">
+                    <input type="file" class="form-control me-4" id="image" name="image[]" multiple style="width:70%;">
                 </div>
                 
         </div>
@@ -129,7 +141,7 @@
                 </div>
                 <div class="form-group mb-3 d-md-flex justify-content-between">
                     <label for="image" class="form-label my-auto">Dokumentasi</label>
-                    <input type="file" class="form-control me-4" id="edit-image" name="image" style="width:70%;">
+                    <input type="file" class="form-control me-4" id="edit-image" name="image[]" multiple style="width:70%;">
                 </div>
                 <div id="previous-image-container">
                     <img id="previous-image" src="" alt="Gambar Sebelumnya" style="max-width: 80px; max-height: 80px; border:1px solid #000">
@@ -155,21 +167,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="dateRangeForm">
+                <form action="{{ route('print') }}"  method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="mb-3">
                         <label for="startDate" class="form-label">Tanggal Awal</label>
-                        <input type="date" class="form-control" id="startDate" name="startDate">
+                        <input type="date" class="form-control" name="start_date">
                     </div>
                     <div class="mb-3">
                         <label for="endDate" class="form-label">Tanggal Akhir</label>
-                        <input type="date" class="form-control" id="endDate" name="endDate">
+                        <input type="date" class="form-control" name="end_date">
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary" id="print-modal-button">Cetak</button>
+                <button type="submit" class="btn btn-primary" id="print-modal-button">Cetak</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

@@ -1,9 +1,15 @@
 @extends('layouts.navbar')
 
 @section('content')
+<style>
+  .img-pr{
+    width:100%;
+    object-fit:cover;
+  }
+</style>
 <section class="section-dr-py bg-body ">
     <div class="container">
-      <h3 class="text-center mb-3 mb-md-5"><span class="section-title">Berita</h3>
+      <h3 class="text-center mb-3 mb-md-5"><span class="section-title">Galeri</h3>
       <div class="row mt-5">
         <div class="col-12 col-md-4">
         <form action="galeri" method="GET">
@@ -21,12 +27,26 @@
         <div class="col-lg-4 col-sm-6">
           <div class="card h-100 bg-label-primary text-white shadow-lg">
             <div class="card-body">
-              <div class="bg-primary rounded-3 text-center mb-3 overflow-hidden">
-                <img
-                  class="img-pr img-fluid"
-                  src="{{ asset('assets/dataimage/' . $item->image) }}"
-                  alt="campaign image" />
-              </div>
+            <div class="bg-primary rounded-3 text-center mb-3 overflow-hidden pembungkus">
+                  @if($item->image)
+                    @php
+                        $imagePaths = json_decode($item->image);
+                    @endphp
+
+                    @if(!empty($imagePaths))
+                        {{-- Menampilkan hanya satu gambar (ambil indeks pertama) --}}
+                        @php
+                            $firstImagePath = reset($imagePaths);
+                        @endphp
+                        <img src="{{ asset('assets/dataimage/' . $firstImagePath) }}"  data-bs-toggle="tooltip" class="img-pr img-fluid">
+                    @else
+                        No Image
+                    @endif
+
+                @else
+                    No Image
+                @endif
+                  </div>
               <div>
                 <ul class="p-0 m-0">
                   <li class="d-flex mb-3 pb-1">
@@ -42,6 +62,7 @@
                   </li>
                 </ul>
               </div>
+              <a href="{{ route('galeri-detail', ['id' => $item->id]) }}" class="btn bg-primary w-100 text-white">Selengkapnya</a>
             </div>
           </div>
         </div>

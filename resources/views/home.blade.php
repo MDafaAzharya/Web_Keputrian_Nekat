@@ -1,6 +1,26 @@
 @extends('../layouts/navbar')
 
 @section('content')
+<style>
+  .img-pr{
+    width:100%;
+    object-fit:cover;
+  }
+    .profile-image{
+      width:500px;
+      height:300px;
+      object-fit: cover;
+
+    }
+    @media (min-width: 320px) and (max-width: 767px){
+      .profile-image{
+      width:300px;
+      height:170px;
+      object-fit: cover;
+      }
+    }
+</style>
+
 <section class="mt-5 home">
   <div class="mt-5">
     <div id="carouselExampleCaptions" class="carousel slide px-lg-5">
@@ -54,11 +74,24 @@
             <div class="col-lg-4 col-sm-6">
               <div class="card h-100 text-white shadow-lg">
                 <div class="card-body">
-                  <div class="bg-primary rounded-3 text-center mb-3 overflow-hidden">
-                    <img
-                      class="img-pr img-fluid"
-                      src="{{ asset('assets/dataimage/'. $item->image) }}"
-                      alt="campaign image" />
+                  <div class="bg-primary rounded-3 text-center mb-3 overflow-hidden pembungkus">
+                  @if($item->image)
+                    @php
+                        $imagePaths = json_decode($item->image);
+                    @endphp
+
+                    @if(!empty($imagePaths))
+                        {{-- Menampilkan hanya satu gambar (ambil indeks pertama) --}}
+                        @php
+                            $firstImagePath = reset($imagePaths);
+                        @endphp
+                        <img src="{{ asset('assets/dataimage/' . $firstImagePath) }}"  data-bs-toggle="tooltip" class="img-pr img-fluid">
+                    @else
+                        No Image
+                    @endif
+                  @else
+                      No Image
+                  @endif
                   </div>
                   <div>
                     <ul class="p-0 m-0">
@@ -75,14 +108,15 @@
                       </li>
                     </ul>
                   </div>
+                  <a href="{{ route('galeri-detail', ['id' => $item->id]) }}" class="btn bg-primary w-100 text-white">Selengkapnya</a>
                 </div>
               </div>
             </div>
+            @endforeach
           </div>
-        @endforeach
           <div class="row mt-5">
             <div class="col-12 d-flex align-items-center justify-content-center mb-5">
-              <a href=""><button class="btn btn-primary btn-lg">Selengkapnya</button></a>
+              <a href="{{ route('galeri') }}"><button class="btn btn-primary btn-lg">Selengkapnya</button></a>
             </div>
           </div>
         </div>

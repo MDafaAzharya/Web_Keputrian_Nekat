@@ -29,11 +29,21 @@
                 <td><center>{{ $report->lokasi }}</td>
                 <td><center>{{ $report->keterangan }}</td>
                 <td>
-                    @if($report->image)
-                    <img src="{{ asset('assets/dataimage/' .$report->image) }}" alt="Image" width="70" height="70">
+                @if($report->image)
+                @php
+                    $imagePaths = json_decode($report->image);
+                    @endphp
+
+                    @if(!empty($imagePaths))
+                        @foreach($imagePaths as $imagePath)
+                                <img src="{{ asset('assets/dataimage/' . $imagePath) }}" height="70" width="70" alt="" srcset="" data-bs-toggle="tooltip">
+                        @endforeach
                     @else
-                    No Image
+                        No Image
                     @endif
+                @else
+                No Image
+                @endif
                 </td>
             </tr>
             @endforeach

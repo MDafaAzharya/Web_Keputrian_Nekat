@@ -52,13 +52,12 @@ class LoginController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Profil berhasil diperbarui');
-        return redirect()->back()->with('error', 'Profil Gagal diperbarui');
     }
 
     public function actionlogout()
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 
     public function register()
@@ -76,7 +75,6 @@ class LoginController extends Controller
         $user->save();
 
         return redirect()->route('login')->with('success', 'Register Berhasil.');
-        return redirect()->route('register')->with('error', 'Register Gagal ');
     }
     public function showLinkRequestForm()
     {
@@ -85,15 +83,15 @@ class LoginController extends Controller
     
     public function sendResetLinkEmail(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
-    
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-    
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with('status', __($status))
-            : back()->withErrors(['email' => __($status)]);
+                $request->validate(['email' => 'required|email']);
+            
+                $status = Password::sendResetLink(
+                    $request->only('email')
+                );
+            
+                return $status === Password::RESET_LINK_SENT
+                    ? back()->with('status', __($status))
+                    : back()->withErrors(['email' => __($status)]);
     }
     public function showResetForm (Request $request,$token)
     {

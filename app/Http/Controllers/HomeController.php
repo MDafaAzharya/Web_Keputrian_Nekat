@@ -24,14 +24,18 @@ class HomeController extends Controller
 
         $cardfoto = ActivityModel::when($query, function ($query, $search) {
             return $query->where('jenis_kegiatan', 'like', '%' . $search . '%')
-                         ->orWhere('lokasi', 'like', '%' . $search . '%')
-                         ->orWhere('keterangan', 'like', '%' . $search . '%')
-                         ->orWhere('date', 'like', '%' . $search . '%');
-
-
+                        ->orWhere('lokasi', 'like', '%' . $search . '%')
+                        ->orWhere('keterangan', 'like', '%' . $search . '%')
+                        ->orWhere('date', 'like', '%' . $search . '%');
         })
         ->get();
         return view('galeri', compact('cardfoto'));
+    }
+
+    public function detail($id)
+    {
+        $galeri =  ActivityModel::find($id);
+        return view("galeri-detail", compact('galeri'));
     }
 
     public function agenda(){

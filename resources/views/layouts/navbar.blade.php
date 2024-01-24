@@ -70,28 +70,24 @@
          <div class="col-lg-4">
           <h6 class="footer-title text-uppercase text-white"> Keputrian Katapang</h6>
            <p class="footer-text mb-4 text-white">
-             Satuan organisasi yang mengelola Gerakan Pramuka tingkat nasional, dan 
-             berkedudukan di Ibukota Negara,Jakarta
-             <br><br>
-             "Gerakan Pramuka Wadah Utama Pembentukan Kadar Pemimpin Bangsa"
+           Program keputrian yang dilaksanakan setiap hari Jumat. Melalui kegiatan ini, para pelajar putri yang 
+           telah berusia remaja bisa mendapatkan pengetahuan dan ilmu tentang kewanitaan. 
            </p>
          </div>
          <div class="col-lg-5 col-md-4 col-sm-6 ms-lg-5">
-           <h6 class="footer-title mb-4 text-uppercase text-white">Contact</h6>
-           <p  class="footer-text mb-4 text-white">
-            Banjaran<br>
-            Email : mdafaazharya@gmail.com <br>
-            Telfon : 08967868  
+           <h6 class="footer-title mb-4 text-uppercase text-white">Alamat</h6>
+           <p  class="footer-text mb-4 text-white w-75">
+           Jalan Ceuri Jalan Terusan Kopo No.KM 13.5, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40971
            </p>
          </div>
          <div class="col-lg-2 col-md-4 col-sm-6">
            <h6 class="footer-title mb-4 text-uppercase text-white">Media Sosial</h6>
            <ul class="list-unstyled justify-content-start d-flex">
              <li class="mb-3">
-               <a href="" target="_blank" class="footer-link"><i class="fa-solid fa-globe fa-xl" style="color:white;"></i></a>
+               <a href="https://www.smkn1katapang.sch.id/" target="_blank" class="footer-link"><i class="fa-solid fa-globe fa-xl" style="color:white;"></i></a>
              </li>
              <li class="mb-3">
-               <a href="" target="_blank" class="footer-link ms-3"><i class="fa-brands fa-instagram fa-xl" style="color:white;"></i></a>
+               <a href="https://www.instagram.com/smkn1katapang/" target="_blank" class="footer-link ms-3"><i class="fa-brands fa-instagram fa-xl" style="color:white;"></i></a>
              </li>
            </ul>
          </div>
@@ -99,7 +95,7 @@
        <div class="row mt-2">
           <div class="col-12">
               <hr class="text-white">
-              <p class="footer-text text-white">© 2022 Company, Inc. All rights reserved.</p>
+              <p class="footer-text text-white">© 2024 SMKN 1 Katapang, All rights reserved.</p>
           </div>
        </div>
      </div>

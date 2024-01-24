@@ -48,7 +48,7 @@
                         <a class="nav-link" href="{{route('profile-keputrian')}}">Profile Keputrian</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('galeri-dashboard')}}">Galeri</a>
+                        <a class="nav-link" href="{{route('galeri-dashboard')}}">Slider</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('agenda-dashboard')}}">Agenda</a>
