@@ -14,7 +14,7 @@
         <div class="col-12 col-md-4">
         <form action="galeri" method="GET">
         <div class="input-group">
-            <input type="text" name="query" placeholder="Cari Berita ...." class="form-control" value="{{ request('query') }}" />
+            <input type="text" name="query" placeholder="Cari Galeri ...." class="form-control" value="{{ request('query') }}" />
             <div class="input-group-append">
                 <button class="btn btn-primary rounded-left" type="submit"><i class="ti ti-search"></i> Cari</button>
             </div>

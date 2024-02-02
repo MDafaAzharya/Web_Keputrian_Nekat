@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $foto = Galeri::take(3)->get();
-        $cardfoto = ActivityModel::all();
+        $cardfoto = ActivityModel::orderBy('created_at','desc')->get();
         $keputrian = Keputrian::all();
         return view('home', compact('foto','cardfoto','keputrian'));
     }
@@ -22,7 +22,8 @@ class HomeController extends Controller
     {
         $query = $request->input('query');
 
-        $cardfoto = ActivityModel::when($query, function ($query, $search) {
+        $cardfoto = ActivityModel::orderBy('created_at','desc')
+        ->when($query, function ($query, $search) {
             return $query->where('jenis_kegiatan', 'like', '%' . $search . '%')
                         ->orWhere('lokasi', 'like', '%' . $search . '%')
                         ->orWhere('keterangan', 'like', '%' . $search . '%')
