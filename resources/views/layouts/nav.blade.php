@@ -30,7 +30,7 @@
 <body>
     <nav class="navbar navbar-expand-lg shadow ">
         <div class="container-fluid px-4">
-            <a class="navbar-brand" href="/doc"><img src="{{ asset('assets/img/katapang.png') }}" alt="" srcset=""
+            <a class="navbar-brand" href="{{route('report')}}"><img src="{{ asset('assets/img/katapang.png') }}" alt="" srcset=""
                     width:"40px" height="40px"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

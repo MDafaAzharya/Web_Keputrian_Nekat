@@ -59,7 +59,7 @@
             <img src="{{ asset('assets/dataimage/' .$item->gambar) }}" alt="" srcset=""  class="profile-image mx-auto mx-md-0 d-flex">
         </div>
         <div class="col-lg-6 mt-lg-5">
-            <h4 class="mt-3 mt-md-0 text-black"><strong>{{ $item->judul }}</strong></h4>
+            <h4 class="mt-3 mt-md-0 text-black text-center text-md-start"><strong>{{ $item->judul }}</strong></h4>
             <p class="fs-6 text-black">{!! $item->text !!}</p>
         </div>
         @endforeach

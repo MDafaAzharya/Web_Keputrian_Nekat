@@ -121,7 +121,7 @@
                 </div>
                 <div class="mb-3"> <label for="email" class="form-label">{{ __('Pilih Foto') }}</label>
                     <input type="file" class="form-control @error('gambar') is-invalid @enderror"
-                        id="gambar" name="gambar" placeholder="gambar" value="{{$data->judl}}" required autocomplete="gambar" autofocus
+                        id="gambar" name="gambar" placeholder="gambar" value="{{$data->judl}}" autocomplete="gambar" autofocus
                         value="{{ old('gambar') }}" /> @error('gambar')
                         <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong>
                         </span>

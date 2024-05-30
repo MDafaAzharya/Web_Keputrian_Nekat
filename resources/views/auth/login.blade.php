@@ -46,6 +46,9 @@
 				<div class="ms-5 textInfo ">
 					Lupa Password? <a href="/password/reset" class="ml-2">forgot possword</a>
 				</div>
+				<div class="textInfo text-center">
+					<a href="/" class="ml-2">Back to Home</a>
+				</div>
 			</div>
 		</div>
 	</div>

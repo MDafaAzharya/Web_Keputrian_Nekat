@@ -18,7 +18,7 @@ class KeputrianController extends Controller
         $request->validate([
             'judul' => 'required',
             'text' => 'required',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'gambar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $data = Keputrian::find($request->id);
